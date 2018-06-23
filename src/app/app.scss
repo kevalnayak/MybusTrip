@@ -1,0 +1,125 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+@import "../../node_modules/ionic2-auto-complete/auto-complete";
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,600,700');
+
+$theme-color: #0466D6;
+%theme-gradient{
+background: #024795;
+background: -moz-linear-gradient(-45deg, #024795 0%, #4f93e2 100%);
+background: -webkit-linear-gradient(-45deg, #024795 0%,#4f93e2 100%);
+background: linear-gradient(135deg, #024795 0%,#4f93e2 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#024795', endColorstr='#4f93e2',GradientType=1 );
+}
+
+/******* Common Element SCSS Start ******/
+a 						{ text-decoration: none; outline: none;}
+a:focus, a:active, a:visited, a:HOVER	{ text-decoration: none; outline: none; }
+.theme-btn 				{ @extend %theme-gradient; padding: 15px 15px; width: 100%; font-size: 18px; line-height: 24px; font-weight: 700; color: #fff; border-radius: 2em; text-transform: capitalize; }
+/******* Common Element SCSS End ******/
+
+/******* Header Section CSS Start *******/
+ion-app.app-root 		{ font-family: 'Poppins', sans-serif; }
+ion-navbar.toolbar 		{ padding: 12px 4px; min-height: 56px;
+	.toolbar-background { @extend %theme-gradient; border: none; }
+	.bar-buttons  		{ color: #fff; }
+	ion-title 			{ padding: 0px; }
+	.toolbar-title 		{ padding: 0px 48px; font-size: 18px; line-height: 32px; color: #fff; text-align: center; font-weight: 700; text-transform: capitalize;}
+	.bar-button,
+	.right-btn  		{ margin-top: 0px; margin-bottom: 0px; padding: 0px; min-width: 36px;  position: absolute; height: 32px; top: calc(50% - 16px); text-align: center;  }
+	.bar-button 		{ left: 5px; }
+	.right-btn 			{ right: 5px; }
+	.right-btn 			{ background: transparent; color: #fff; font-size: 20px; }
+}
+/******* Header Section CSS Start *******/
+
+ion-list.form-section{
+	.item-block 				{ border: none !important; box-shadow: none !important; -webkit-box-shadow: none !important;
+		.item-inner 			{ border: none;box-shadow: none !important; -webkit-box-shadow: none !important; }
+		ion-input input 		{ margin: 0px 0px 15px; padding: 10px; color: $theme-color; border-bottom: 2px solid #b4b4b4; text-align: center; }
+		&.input-has-focus ion-input input 	{ border-color: $theme-color; }
+	}	
+}
+
+ion-menu .menu-inner {
+	ion-toolbar 						{  min-height: 56px; }
+	.toolbar .toolbar-background		{ @extend %theme-gradient; border: none; }
+	.toolbar-title 						{ font-size: 18px; line-height: 32px; color: #fff; text-align: center; font-weight: 700; text-transform: capitalize;}
+    ion-list 							{ padding-top: 50px; }
+    .list .item-block                   { padding-left: 24px; position: relative; font-size: 16px; line-height: 26px; color: #B2B2B2;
+        &::before                       { content: ""; display: block; width: 48px; height: 48px; position: absolute; background: url() no-repeat left center / 32px; }
+        &:hover                         { color: $theme-color; }
+        &:nth-of-type(1)::before        { background-image: url(../assets/imgs/home-gray.png);  }
+        &:nth-of-type(1):hover::before        { background-image: url(../assets/imgs/home-blue.png);  }
+        &:nth-of-type(2)::before        { background-image: url(../assets/imgs/trip-gray.png);  }
+        &:nth-of-type(2):hover::before        { background-image: url(../assets/imgs/trip-blue.png);  }
+        &:nth-of-type(3)::before        { background-image: url(../assets/imgs/wallet-gray.png);  }
+        &:nth-of-type(3):hover::before        { background-image: url(../assets/imgs/wallet-blue.png);  }
+        &:nth-of-type(4)::before        { background-image: url(../assets/imgs/cancel-ticket-gray.png);  }
+        &:nth-of-type(4):hover::before        { background-image: url(../assets/imgs/cancel-ticket-blue.png);  }
+        &:nth-of-type(5)::before        { background-image: url(../assets/imgs/settings-gray.png);  }
+        &:nth-of-type(5):hover::before        { background-image: url(../assets/imgs/settings-blue.png);  }
+        &:nth-of-type(6)::before        { background-image: url(../assets/imgs/logout-gray.png);  }
+        &:nth-of-type(6):hover::before        { background-image: url(../assets/imgs/logout-blue.png);  }
+        /*&.logout-btn::before            { background-image: url(../assets/imgs/logout-gray.png);  }
+        &.logout-btn                    { position: absolute; bottom: 0;}
+        &:hover::before                 { background-position: right center;}*/
+        &:last-child,
+        &:first-child                   { border: none; }
+        .item-inner                     { padding: 4px 16px 4px 46px; background: transparent; border: none; } 
+        ion-label 						{ margin-top: 0px; margin-bottom: 0px; }  
+    }
+}
+
+
+.title-block 			{ margin: 12px -16px; padding: 10px 16px; background: #1d75da;
+	p 					{ margin: 0px; font-size: 18px; line-height: 24px; font-weight: 600; color: #fff; }
+} 
+ion-card.card  			{ margin: 0px; width: 100%; border-radius: 8px; box-shadow: 0px 2px 6px rgba(0,0,0,0.25); -webkit-box-shadow: 0px 2px 6px rgba(0,0,0,0.25); }
+
+.searchbar  			{ margin: 20px 0px 40px; padding: 10px 5px; min-height: initial; background: transparent; border: 1px solid #b4b4b4; box-shadow: 0px 2px 6px rgba(0,0,0,0.25); -webkit-box-shadow: 0px 2px 6px rgba(0,0,0,0.25); border-radius: 8px;
+	&.searchbar-left-aligned .searchbar-input 			{ padding-left: 40px; font-size: 16px; line-height: 18px; }
+	.searchbar-search-icon 		{ width: 20px; height: 20px; top: 5px; background-size: 20px; }
+}
+
+.loading-wrapper{
+    background: transparent !important;
+    box-shadow: none !important;
+}
+//  padding: 20px 9px;
+.saet-layout                        { margin: 0px auto; width: 290px; border: 1px solid $theme-color; border-radius: 8px; }
+.saet-layout ul                     { list-style: none; margin: 0px; padding: 0px; }
+.saet-layout ul .checkbox-icon      { border-radius: 0px; position: absolute; }
+.saet-layout ul .seat-row li.seat   { margin: 12px 10px; width: 36px; height: 40px; display: inline-block; position: relative; background: red; }
+// .saet-layout ul .seat-row li.seat:nth-child(2)  { margin-right: 42px; }
+.saet-layout ul .seat-row li.seat .checkbox-icon,
+.saet-layout ul .seat-row li.seat .item-cover,
+.saet-layout ul .seat-row li.seat .checkbox,
+.saet-layout  li.seat p.number      { margin: 0px; position: absolute !important; width: 36px; height: 40px; top: 0px; left: 0px; text-align: center;}
+.saet-layout ul .seat-row li.seat .checkbox-icon    { z-index: 4;  }
+.saet-layout  li.seat p.number                      { z-index: 5; font-size: 18px; line-height: 40px; }
+.saet-layout ul .seat-row li.seat .item-cover       { z-index: 6; }
+.saet-layout .checkbox .checkbox-icon .checkbox-inner { display: none; }
+.saet-layout  li.seat:before,
+.saet-layout  li.seat:after         { content: ""; display: block; position: absolute; border: 1px solid #c8c7cc; z-index: 1;}
+.saet-layout  li.seat:before        { width: 42px; height: 30px; bottom: 0px; left: -4px; }
+.saet-layout  li.seat:after         { width: 20px; height: 40px; bottom: -4px; left: 8px; }
+.scroll-content {
+        margin-bottom: 0px !important;
+    }

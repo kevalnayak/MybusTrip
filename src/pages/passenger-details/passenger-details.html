@@ -1,0 +1,57 @@
+<!--
+  Generated template for the PassengerDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+  	<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>PassengerDetails</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<div class="page-section">
+    	<h3>Passenger Details</h3>
+      	
+        <ion-list class="form-section" *ngFor="let one of param.Passengers">
+            <ion-label>Seat No</ion-label>
+            <ion-item>                
+                {{one.SeatNo}}
+            </ion-item>
+            <ion-item >
+                <ion-input type="text" placeholder="Name" [(ngModel)]="one.Name" name="Name" required></ion-input>
+            </ion-item>
+             <!--<div *ngIf="!NameValid">Please enter Name</div>-->
+            <ion-item >
+                <ion-input type="number" placeholder="Age" [(ngModel)]="one.Age" name="Age" required></ion-input>
+            </ion-item>
+            
+            <ion-item >
+				<ion-label>Gender</ion-label>
+				<ion-select [(ngModel)]="one.Gender">
+					<ion-option value="M">Male</ion-option>
+					<ion-option value="F">Female</ion-option>
+				</ion-select>
+            </ion-item>
+        </ion-list>
+         
+        <ion-list class="form-section">
+             <ion-item>
+                <ion-input type="email" placeholder="Ticket will be sent to this Email ID" name="Email" [(ngModel)]="param.ContactInfo.Email" required></ion-input>
+            </ion-item>
+             <!--<div *ngIf="!Emailvalid">Please enter valid email address</div>-->
+             <ion-item>
+                <ion-input type="tel" placeholder="Enter Phone Number" name="Phone" [(ngModel)]="param.ContactInfo.Mobile"></ion-input>
+            </ion-item>
+        </ion-list>
+        <button class="theme-btn" (click)="print()" >continue booking</button>
+  
+    </div>
+</ion-content>

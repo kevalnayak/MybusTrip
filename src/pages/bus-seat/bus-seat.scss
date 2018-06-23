@@ -1,0 +1,34 @@
+page-bus-seat {
+  .page-section {
+    padding: 15px 0px;
+  }
+  h3 {
+    margin: 15px 0px 30px;
+    font-size: 20px;
+    line-height: 28px;
+    color: $theme-color;
+    text-align: center;
+  }
+  
+  .Avail_female {
+    // background: pink !important
+    border: 1.5px solid pink;
+  }
+  .Avail_male {
+    // background: blue !important;
+    border: 1.5px solid blue;
+  }
+  .Avail {
+    background: none !important
+  }
+  .Not_Avail {
+    background: red !important
+  }
+
+  .notd{
+    visibility: hidden
+  }
+  .dis{
+    visibility: visible
+  }
+}

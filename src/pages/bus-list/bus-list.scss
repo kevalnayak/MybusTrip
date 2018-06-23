@@ -1,0 +1,27 @@
+page-bus-list {
+	.title-block 			{ text-align: center;
+		&.date-block 		{ background: #81b2ea; }
+		p 			{ font-size: 16px; display: inline-block; vertical-align: middle;  }
+		ion-icon 	{ margin: 0px 8px; font-size: 20px; line-height: 24px; color: #fff; vertical-align: middle; }
+	}
+	.card			{ margin-top: 25px;
+			.card-content 	{ padding: 20px 10px 15px; background: url("../assets/imgs/bus-icon-blue.png") no-repeat left 15px center / 20px; }
+			.info-block 	{ padding-left: 40px; }
+			.seat-block 	{ text-align: center; }
+			h3,p 			{ font-size: 15px; line-height: 20px; color: #191919; }
+			h3 				{ font-weight: 600; color: $theme-color;
+				span 		{ color: #191919; }
+			}
+	}
+
+@media (max-width: 340px) {
+	.card 	{
+		.info-block 	{ padding-left: 35px; }
+		h3,p 			{ font-size: 13px;  }
+	}
+}
+
+.button-inner{
+	color: white;
+}
+}

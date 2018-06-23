@@ -1,0 +1,103 @@
+<!--
+  Generated template for the BusListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+  	<button ion-button menuToggle>
+      <ion-icon name="menu" ></ion-icon>
+    </button>
+    <ion-title>Bus List</ion-title>
+    <button ion-button class="right-btn" >
+      <ion-icon name="funnel" (click)="openfilter()"></ion-icon>
+    </button>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<div class="title-block">
+		<p>{{mainList[0].FromName}}</p>
+		<ion-icon name="md-arrow-round-forward"></ion-icon>
+		<p>{{mainList[0].ToName}}</p>
+	</div>
+	<div class="title-block date-block">
+		<ion-icon name="arrow-back"></ion-icon>
+		<p>{{changeFormate(mainList.JourneyDate,'DD MMM YYYY')}}</p>
+		<ion-icon name="arrow-forward"></ion-icon>
+	</div>
+
+	<div *ngIf="buslist.length != 0">
+	<ion-card *ngFor='let one of buslist'>
+		<ion-card-content (click)='Bookseat(one.BusStatus.RouteBusId,one)'>
+			<ion-grid no-padding>
+				<ion-row align-items-center >
+					<ion-col col-8>
+						<div class="info-block">
+							<h3>{{changeFormate(one.ArrTime,'LT')}} - <span>{{changeFormate(one.DeptTime,'LT')}}</span></h3>
+							<p>CMS</p>
+							<p>AC</p>
+						</div>
+					</ion-col>
+					<ion-col col-4 class="seat-block">
+						<p>{{one.BusStatus.Availability}} seat</p>
+						<h3>INR {{one.BusStatus.BaseFares[0]}}</h3>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</ion-card-content>
+	</ion-card>
+	</div>
+	<div *ngIf="buslist.length == 0">
+		<ion-card-content>
+			<ion-grid no-padding>
+				<ion-row align-items-center >
+					<h3>No data match to your filter</h3>
+				</ion-row>
+			</ion-grid>
+		</ion-card-content>
+	</div>
+	<!--<ion-card>
+		<ion-card-content>
+			<ion-grid no-padding>
+				<ion-row align-items-center>
+					<ion-col col-8>
+						<div class="info-block">
+							<h3>09:00 AM - <span>01:00 PM</span></h3>
+							<p>CMS</p>
+							<p>AC</p>
+						</div>
+					</ion-col>
+					<ion-col col-4 class="seat-block">
+						<p>20 seat</p>
+						<h3>INR 2000</h3>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</ion-card-content>
+	</ion-card>-->
+
+	<!--<ion-card>
+		<ion-card-content>
+			<ion-grid no-padding>
+				<ion-row align-items-center>
+					<ion-col col-8>
+						<div class="info-block">
+							<h3>09:00 AM - <span>01:00 PM</span></h3>
+							<p>CMS</p>
+							<p>AC</p>
+						</div>
+					</ion-col>
+					<ion-col col-4 class="seat-block">
+						<p>20 seat</p>
+						<h3>INR 2000</h3>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</ion-card-content>
+	</ion-card>-->
+</ion-content>

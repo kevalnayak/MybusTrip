@@ -1,0 +1,44 @@
+<!--
+  Generated template for the BoardingDropPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>BoardingDrop</ion-title>
+ <ion-buttons end *ngIf='isShow'>
+    <button  (click)="submit()">next</button>
+ </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-list class="accordion-list">
+    <!-- First Level -->
+    <ion-list-header *ngFor="let item of information; let i = index" no-lines no-padding>
+      <!-- Toggle Button -->
+      <button ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
+        <!--<ion-icon item-left name="arrow-forward" *ngIf="!item.open"></ion-icon>
+        <ion-icon item-left name="arrow-down" *ngIf="item.open"></ion-icon>-->
+          {{ item.name }}
+      </button>
+      <ion-list radio-group *ngIf="item.open && i == 0 && journeyInfo != undefined" no-lines>
+      <ion-item *ngFor="let child of Pickups; let j = index" class="child" detail-none   no-padding>
+      <ion-label>{{ child.Address }}</ion-label>
+      <ion-radio (ionSelect)="pickupSelect(child.PickupCode,i)" [checked]="journeyInfo.PickUpID == child.PickupCode"></ion-radio>
+      </ion-item>
+      </ion-list>
+
+      <ion-list radio-group *ngIf="item.open && i == 1 && journeyInfo != undefined" no-lines>
+      <ion-item *ngFor="let child of DropOffs; let j = index" class="child" detail-none  no-padding>
+      <ion-label>{{ child.DropoffName }}</ion-label>
+      <ion-radio (ionSelect)="dropoffSelect(child.DropoffCode,i)" [checked]="journeyInfo.DropOffID == child.DropoffCode"></ion-radio>
+      </ion-item>
+      </ion-list>
+     
+    </ion-list-header>
+  </ion-list>
+</ion-content>

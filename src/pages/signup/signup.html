@@ -1,0 +1,51 @@
+<!--
+  Generated template for the SignupPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+  	<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Signup</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<div class="page-section">
+       <img class="form-logo" src=".../../assets/imgs/bus-logo.png">
+		<form #registerForm="ngForm">
+
+			<ion-list class="form-section">
+				<ion-item>
+					<ion-input type="text" placeholder="Username" name="username" [(ngModel)]="registerCredentials.username" required></ion-input>
+				</ion-item>
+
+				<ion-item>
+					<ion-input type="email" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
+				</ion-item>
+
+				<ion-item>
+					<ion-input type="tel" placeholder="Mobile" name="mobile" [(ngModel)]="registerCredentials.mobile" required></ion-input>
+				</ion-item>
+
+				<ion-item>
+					<ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
+				</ion-item>
+
+				<ion-item>
+					<ion-input type="password" placeholder="Confirm Password" name="confirm_password" [(ngModel)]="registerCredentials.confirm_password" required></ion-input>
+				</ion-item>
+
+			</ion-list>
+
+			<button ion-button class="theme-btn" block clear (click)="createAccount()"  [disabled]="!registerForm.form.valid">Create New Account</button>
+
+		</form>
+	</div>
+</ion-content>

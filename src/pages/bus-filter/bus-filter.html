@@ -1,0 +1,84 @@
+<!--
+  Generated template for the BusFilterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+  	<!--<button ion-button>
+      <ion-icon name="menu"></ion-icon>
+    </button>-->
+    <ion-title>Sort and Filter</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<div class="title-block">
+		<p>Bus Type</p>
+	</div>
+	
+	<ion-list radio-group class="form-section" >
+		<ion-item>
+			<ion-label>AC</ion-label>
+			<ion-checkbox [(ngModel)]="AC" (ionChange)='applyFilter($event,"AC")'></ion-checkbox>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>Sleeper</ion-label>
+			<ion-checkbox [(ngModel)]="Sleeper" (ionChange)='applyFilter($event,"Sleeper")'></ion-checkbox>
+		</ion-item>
+		<!--<ion-item>
+			<ion-label>Ac Seater</ion-label>
+			<ion-checkbox [(ngModel)]="AC_Seater" (ionChange)='applyFilter($event,"AC_Seater")'></ion-checkbox>
+		</ion-item>
+		<ion-item>
+			<ion-label>Non-Ac Seater</ion-label>
+			<ion-checkbox [(ngModel)]="Non_Ac_Seater" (ionChange)='applyFilter($event,"Non_Ac_Seater")'></ion-checkbox>
+		</ion-item>-->
+	</ion-list>
+
+	<div class="title-block">
+		<p>Location & travels</p>
+	</div>
+
+	<ion-list class="form-section">
+        <ion-item class="bus title-icon">
+			<ion-label>Travels</ion-label>
+			<ion-select [(ngModel)]="filter_travel" (ionChange)='applyFilter($event,"travel")' multiple="true">
+				<ion-option [value]='one' *ngFor='let one of Travelname'>{{one}}</ion-option>
+				<!--<ion-option value="2">Travels 2</ion-option>-->
+			</ion-select>
+        </ion-item>
+
+        <ion-item class="map title-icon">
+			<ion-label>Boarding Point</ion-label>
+			<ion-select [(ngModel)]="filter_pickup" multiple="true" (ionChange)='applyFilter($event,"pickup")'>
+				<ion-option [value]='one.PickupCode' *ngFor='let one of Pickups'>{{one.PickupName}}</ion-option>
+				<!--<ion-option value="surat">surat</ion-option>-->
+			</ion-select>
+        </ion-item>
+
+        <ion-item class="map title-icon">
+			<ion-label>Droping Point</ion-label>
+			<ion-select [(ngModel)]="filter_drop" multiple="true" (ionChange)='applyFilter($event,"drop")'>
+				<ion-option [value]="one.DropoffCode" *ngFor='let one of Dropoffs'>{{one.DropoffName}}</ion-option>
+				<!--<ion-option value="mumbai">Mumbai</ion-option>-->
+			</ion-select>
+        </ion-item>
+
+        <ion-item class="bus title-icon">
+			<ion-label (click)='openmodal()'>Amenities</ion-label>
+			<!--<ion-select [(ngModel)]="amenities">
+				<ion-option value="a1">Amenities 1</ion-option>
+				<ion-option value="a2">Amenities 2</ion-option>
+			</ion-select>-->
+        </ion-item>
+    </ion-list>
+	<!--<button (click)='Apply()'>Done</button>-->
+	 <button class="theme-btn" (click)='Apply()'>Done</button>	 
+</ion-content>
+

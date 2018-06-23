@@ -1,0 +1,12 @@
+page-bus-filter {
+	.select .select-icon 	{ height: 24px; }
+	ion-list.form-section .item-block 	{ margin-bottom: 10px; }
+	.item-cover 			{ border-bottom: 2px solid #b4b4b4; }
+	.item-block.title-icon 	{ padding-left: 32px; background: url("") no-repeat left center / 22px; }
+	.item-block.title-icon.bus 		{ background-image: url("../assets/imgs/map-icon-blue.png"); }
+	.item-block.title-icon.map 		{ background-image: url("../assets/imgs/bus-icon-blue.png"); }
+	.item-block.title-icon {
+		ion-label,
+		.select-text 			{ font-size: 15px; line-height: 24px; }
+	} 
+}

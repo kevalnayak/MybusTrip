@@ -1,0 +1,87 @@
+<!--
+  Generated template for the BusSeatPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Bus Seat</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf='noData'>
+    <h3>No any data available this time</h3>
+  </div>
+  <div *ngIf='!noData'>
+    <h2>{{layoutname}}</h2>
+    <!-- Segment buttons with text -->
+    <ion-segment [(ngModel)]="busArea" color="primary">
+      <ion-segment-button value="lower" (ionSelect)="lowerBus()">
+        Lower
+      </ion-segment-button>
+      <ion-segment-button value="uper" (ionSelect)="uperBus()" *ngIf='isUper'>
+        Upper
+      </ion-segment-button>
+    </ion-segment>
+     <!--<div *ngIf="totalFare">
+      <p>Total Amount :{{totalFare}}</p>
+      <p>Tax :{{totalTax}}</p>
+      <button ion-button (click)="Procced()">Procced</button>
+    </div>-->
+    <div class="page-section" *ngIf='busArea == "lower"'>
+      <h3>Please select a seat</h3>
+
+      <div class="saet-layout">
+        <ul *ngIf="status">
+          <li class="seat-row" >
+            <ul *ngFor='let row of range(0,lowerseat.length - 1)' >
+              <!--<p>{{row}}</p>-->
+              <li class="seat" *ngFor='let column of range(1,MaxCols)' [ngClass]="(lowerseat[row][column - 1] == -1) ? 'notd' : 'dis' ">
+                <p class="number" [ngClass]="(status[lowerseat[row][column - 1]]) == 0? 'Not_Avail' : (status[lowerseat[row][column - 1]]) == 2 ? 'Avail_male' : (status[lowerseat[row][column - 1]]) == 3 ? 'Avail_female' : (status[lowerseat[row][column - 1]]) == 4 ? 'selected' :'Avail'"  *ngIf="status">
+                   <!--{{row*3+column}}-->
+                   <!--{{status[lowerseat[row][column - 1]]}}-->
+                   {{Seats[lowerseat[row][column - 1]]}}
+                    <!--{{Seats[row*MaxCols+column-1]}}-->
+                </p>
+                <ion-checkbox (ionChange)='changeLowerSeat(lowerseat[row][column - 1],$event,Seats[lowerseat[row][column - 1]])' [disabled]="(status[lowerseat[row][column - 1]]) == 0"></ion-checkbox>
+              </li>
+            </ul>                 
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="page-section" *ngIf='busArea == "uper"'>
+      <h3>Please select a seat</h3>
+      <div class="saet-layout">
+        <ul *ngIf="status">
+          <li class="seat-row" *ngFor='let row of range(0,uperseat.length - 1)'>
+            <ul>
+              <li class="seat" *ngFor='let column of range(1,MaxCols)' [ngClass]="(uperseat[row][column - 1] == -1) ? 'notd' : 'dis' ">
+               <p class="number" [ngClass]="(status[lowerseat.length+uperseat[row][column - 1]]) == 0? 'Not_Avail' : (status[lowerseat.length + uperseat[row][column - 1]]) == 2 ? 'Avail_male' : (status[lowerseat.length + uperseat[row][column - 1]]) == 3 ? 'Avail_female' : (status[uperseat[row][column - 1]]) == 4 ? 'selected' :'Avail'"  *ngIf="status">                                    
+                   {{Seats[uperseat[row][column - 1]]}}                    
+                </p>
+                <ion-checkbox (ionChange)='changeuperseat(uperseat[row][column - 1],$event)' [disabled]="(status[uperseat[row][column - 1]]) == 0"></ion-checkbox>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+ 
+</ion-content>
+<ion-footer *ngIf="totalFare">
+  <ion-toolbar>
+    <!--<ion-title>Footer</ion-title>-->
+     <!--<div *ngIf="totalFare">-->
+      <p>Total Amount :{{totalFare}}</p>
+      <!--<p>Tax :{{totalTax}}</p>-->
+      <button  (click)="Procced()">Procced</button>
+    <!--</div>-->
+  </ion-toolbar>
+</ion-footer>

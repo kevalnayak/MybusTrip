@@ -9,7 +9,9 @@ page-bus-seat {
     color: $theme-color;
     text-align: center;
   }
-  
+  .amount-title             { padding: 0px 15px; }
+  .procced-btn              { @extend %theme-gradient; height: 100%; width: 100%; text-align: center; color: #fff;}
+
   .Avail_female {
     // background: pink !important
     border: 1.5px solid pink;
@@ -24,7 +26,9 @@ page-bus-seat {
   .Not_Avail {
     background: red !important
   }
-
+  .disnone{
+    display: none!important;
+  }
   .notd{
     visibility: hidden
   }

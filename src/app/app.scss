@@ -42,10 +42,12 @@ ion-navbar.toolbar 		{ padding: 12px 4px; min-height: 56px;
 	ion-title 			{ padding: 0px; }
 	.toolbar-title 		{ padding: 0px 48px; font-size: 18px; line-height: 32px; color: #fff; text-align: center; font-weight: 700; text-transform: capitalize;}
 	.bar-button,
-	.right-btn  		{ margin-top: 0px; margin-bottom: 0px; padding: 0px; min-width: 36px;  position: absolute; height: 32px; top: calc(50% - 16px); text-align: center;  }
+	.right-btn  		{ margin-top: 0px; margin-bottom: 0px; padding: 0px; min-width: 36px; z-index: 5; position: absolute; height: 32px; top: calc(50% - 16px); text-align: center;  }
 	.bar-button 		{ left: 5px; }
 	.right-btn 			{ right: 5px; }
 	.right-btn 			{ background: transparent; color: #fff; font-size: 20px; }
+    .back-button-text   { display: none; }
+    .back-button-icon:before    { color: #fff; }
 }
 /******* Header Section CSS Start *******/
 
@@ -103,23 +105,33 @@ ion-card.card  			{ margin: 0px; width: 100%; border-radius: 8px; box-shadow: 0p
     box-shadow: none !important;
 }
 //  padding: 20px 9px;
-.saet-layout                        { margin: 0px auto; width: 290px; border: 1px solid $theme-color; border-radius: 8px; }
-.saet-layout ul                     { list-style: none; margin: 0px; padding: 0px; }
-.saet-layout ul .checkbox-icon      { border-radius: 0px; position: absolute; }
-.saet-layout ul .seat-row li.seat   { margin: 12px 10px; width: 36px; height: 40px; display: inline-block; position: relative; background: red; }
-// .saet-layout ul .seat-row li.seat:nth-child(2)  { margin-right: 42px; }
-.saet-layout ul .seat-row li.seat .checkbox-icon,
-.saet-layout ul .seat-row li.seat .item-cover,
-.saet-layout ul .seat-row li.seat .checkbox,
-.saet-layout  li.seat p.number      { margin: 0px; position: absolute !important; width: 36px; height: 40px; top: 0px; left: 0px; text-align: center;}
-.saet-layout ul .seat-row li.seat .checkbox-icon    { z-index: 4;  }
-.saet-layout  li.seat p.number                      { z-index: 5; font-size: 18px; line-height: 40px; }
-.saet-layout ul .seat-row li.seat .item-cover       { z-index: 6; }
-.saet-layout .checkbox .checkbox-icon .checkbox-inner { display: none; }
-.saet-layout  li.seat:before,
-.saet-layout  li.seat:after         { content: ""; display: block; position: absolute; border: 1px solid #c8c7cc; z-index: 1;}
-.saet-layout  li.seat:before        { width: 42px; height: 30px; bottom: 0px; left: -4px; }
-.saet-layout  li.seat:after         { width: 20px; height: 40px; bottom: -4px; left: 8px; }
+.seat-layout                        { margin: 0px auto; width: 290px; border: 1px solid $theme-color; border-radius: 8px; }
+.seat-layout ul                     { list-style: none; margin: 0px; padding: 0px; }
+.seat-layout ul .checkbox-icon      { border-radius: 0px; position: absolute; }
+.seat-layout ul .seat-row li.seat   { margin: 12px 10px; width: 36px; height: 40px; display: inline-block; position: relative; background: red; }
+// .seat-layout ul .seat-row li.seat:nth-child(2)  { margin-right: 42px; }
+.seat-layout ul .seat-row li.seat .checkbox-icon,
+.seat-layout ul .seat-row li.seat .item-cover,
+.seat-layout ul .seat-row li.seat .checkbox,
+.seat-layout  li.seat p.number      { margin: 0px; position: absolute !important; width: 36px; height: 40px; top: 0px; left: 0px; text-align: center;}
+.seat-layout ul .seat-row li.seat .checkbox-icon    { z-index: 4;  }
+.seat-layout  li.seat p.number                      { z-index: 5; font-size: 18px; line-height: 40px; }
+.seat-layout ul .seat-row li.seat .item-cover       { z-index: 6; }
+.seat-layout .checkbox .checkbox-icon .checkbox-inner { display: none; }
+.seat-layout  li.seat:before,
+.seat-layout  li.seat:after         { content: ""; display: block; position: absolute; border: 1px solid #c8c7cc; z-index: 1;}
+.seat-layout  li.seat:before        { width: 42px; height: 30px; bottom: 0px; left: -4px; }
+.seat-layout  li.seat:after         { width: 20px; height: 40px; bottom: -4px; left: 8px; }
 .scroll-content {
         margin-bottom: 0px !important;
     }
+
+    .seat-layout.sofa-seat-layout       { padding: 20px 40px; }
+.seat-layout ul .seat-row li.seat.sofa-seat,
+.seat-layout ul .seat-row li.seat.sofa-seat .checkbox-icon,
+.seat-layout ul .seat-row li.seat.sofa-seat .item-cover,
+.seat-layout ul .seat-row li.seat.sofa-seat .checkbox,
+.seat-layout  li.seat.sofa-seat p.number    { height: 80px; }
+.seat-layout  li.seat.sofa-seat:before        { display: none; }
+.seat-layout  li.seat.sofa-seat:after         { width: 20px; height: 2px; bottom: 10px; left: 8px; z-index: 4; border-radius: 2em; }
+

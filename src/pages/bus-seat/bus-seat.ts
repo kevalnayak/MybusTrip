@@ -18,6 +18,10 @@ import { GeneralProvider } from "../../providers/general/general";
   templateUrl: 'bus-seat.html',
 })
 export class BusSeatPage {
+  seatStatus: any;
+  lowerseatType: any;
+  uperseatType: any;
+  actualRow: number;
   MaxRows: any;
   MaxCols: any;
   remainseat = [];
@@ -68,7 +72,8 @@ export class BusSeatPage {
     this.seatTotalFare = [];
     this.seatType = [];
     this.isUper = false;
-    this.selectedSeat = []
+    this.selectedSeat = [];
+    this.seatStatus = [];
   }
   
   // ionViewDidLoad() {
@@ -87,6 +92,11 @@ export class BusSeatPage {
       //  Testing logic
       this.MaxRows = data['data'].ChartLayout.Info.Lower.MaxRows;
       this.MaxCols = data['data'].ChartLayout.Info.Lower.MaxCols;
+      if (data['data'].ChartLayout.Layout.Upper != undefined) {
+        this.actualRow = Math.round(this.MaxRows / 2)
+      } else {
+        this.actualRow = this.MaxRows
+      }
       if(data['data'].ChartLayout.Layout.Lower.length != 0)
       {
               for(let i=0;i<this.MaxRows;i++){
@@ -101,7 +111,16 @@ export class BusSeatPage {
                 var row = data['data'].ChartLayout.Layout.Lower[i][1];
                 var col = data['data'].ChartLayout.Layout.Lower[i][2];
                 var value =  data['data'].ChartLayout.Layout.Lower[i][0];
-
+                this.lowerseatType = data['data'].ChartLayout.Layout.Lower[i][5];
+                console.log(this.lowerseatType);
+                // const rowFromType = this.lowerseatType.map(element=>{
+                //   if(element == 2){
+                //     row = row / 2;
+                //   }
+                // })
+                if (this.lowerseatType == 2) {
+                  row = row / 2;
+                }
                 this.lowerseat[row][col] = value;
               }
       }  
@@ -117,10 +136,13 @@ export class BusSeatPage {
 
 
               for(let i=0;i<data['data'].ChartLayout.Layout.Upper.length;i++){
-                var row = data['data'].ChartLayout.Layout.Upper[i][1];
-                var col = data['data'].ChartLayout.Layout.Upper[i][2];
-                var value =  data['data'].ChartLayout.Layout.Upper[i][0];
-
+                let row = data['data'].ChartLayout.Layout.Upper[i][1];
+                let col = data['data'].ChartLayout.Layout.Upper[i][2];
+                let value =  data['data'].ChartLayout.Layout.Upper[i][0];
+                this.uperseatType = data['data'].ChartLayout.Layout.Upper[i][5];
+            if (this.uperseatType == 2) {
+              row = row / 2;
+            }
                 this.uperseat[row][col] = value;
               }
       }      
@@ -201,7 +223,7 @@ export class BusSeatPage {
         dropoffs: this.DropOffs, pickups: this.Pickups,
         basefare: this.baseFare, totalFare: this.totalFare,       
         jouneyInfo:this.navParams.get('data'),
-        selectedseat:this.selectedSeat
+        selectedseat:this.selectedSeat,seatStatus:this.seatStatus
       })
   }
 
@@ -211,22 +233,22 @@ export class BusSeatPage {
     return this.input;
   }
   
-  changeLowerSeat(id, $e,seatno) {   
+  changeLowerSeat(id, $e,seatno,status) {   
     var seatType = this.mainseatData.Lower[id][5]
-    this.selectSeat(id, $e,seatType,seatno)
+    this.selectSeat(id, $e,seatType,seatno,status)
   }
   changeUperSeat(id, $e) {
     var uperSeat = this.uper[id];           
     //  this.selectSeat(this.totalIntgerSeats+id, $e, uperSeat[7],uperSeat[5])
   }
-  selectSeat(seq_no, $e,seat_type,seatno) {
+  selectSeat(seq_no, $e,seat_type,seatno,status) {
         
     if ($e.checked == true) {
       this.selectedSeat.push({
         'SeatNo':seatno,
         'SeatTypeId':seat_type,
         'Fare':this.fare[seq_no][0],
-        'status':this.status[seq_no],
+        // 'status':this.status[seq_no],
         'Name':'',
         'Age':'',
         'Gender':''
@@ -236,6 +258,7 @@ export class BusSeatPage {
       this.selectedSeatFare.push(this.fare[seq_no][1]);
       this.seatTotalFare.push(this.fare[seq_no][0]);
       this.seatType.push(seat_type);
+      this.seatStatus.push(status);
     } else if($e.checked == false) {
       let tmp = this.selectedSeat;
       this.selectedSeat = []
@@ -247,7 +270,8 @@ export class BusSeatPage {
       this.selectedSeatArray.pop(seq_no);
       this.selectedSeatFare.pop(this.fare[1]);
       this.seatTotalFare.pop(this.fare[0])
-      this.seatType.pop(seat_type)
+      this.seatType.pop(seat_type);
+      this.seatStatus.pop(status);
     }
     // console.log(this.selectedSeatArray)
     // console.log(this.selectedSeatFair)
@@ -256,5 +280,6 @@ export class BusSeatPage {
     this.totalFare = this.seatTotalFare.reduce((acc, value) => acc + value, 0);
     this.totalTax = this.totalFare - this.baseFare;
     console.log(this.selectedSeat)
+    console.log(this.seatStatus)
   }
 }

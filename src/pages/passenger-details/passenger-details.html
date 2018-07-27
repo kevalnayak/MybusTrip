@@ -19,39 +19,52 @@
 <ion-content padding>
 	<div class="page-section">
     	<h3>Passenger Details</h3>
-      	
-        <ion-list class="form-section" *ngFor="let one of param.Passengers">
-            <ion-label>Seat No</ion-label>
-            <ion-item>                
-                {{one.SeatNo}}
+      	<form [formGroup]="bookingForm" (ngSubmit)="BookNow()" #f="ngForm" novalidate>
+        <ion-list class="form-section" >
+            
+            <ion-item>
+                <ion-grid no-padding>
+                    <ion-row>
+                        <ion-col col-3 no-padding>
+                            <h4>Seat No - </h4>
+                        </ion-col>
+                        <ion-col col-1 no-padding align-self-stretch *ngFor="let one of param.Passengers; let i = index;">
+                            <h4 text-right >{{one.SeatNo}} <span *ngIf="i < param.Passengers.length - 1">,</span></h4>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>               
+                
             </ion-item>
             <ion-item >
-                <ion-input type="text" placeholder="Name" [(ngModel)]="one.Name" name="Name" required></ion-input>
+                <ion-input type="text" placeholder="Name"  name="Name" formControlName="name" ></ion-input>
             </ion-item>
-             <!--<div *ngIf="!NameValid">Please enter Name</div>-->
+             <div *ngIf="f.submitted && bookingForm.controls.name.errors?.required" class="help-block">Please enter name</div>
             <ion-item >
-                <ion-input type="number" placeholder="Age" [(ngModel)]="one.Age" name="Age" required></ion-input>
+                <ion-input type="number" placeholder="Age" name="Age"  formControlName="age"></ion-input>
             </ion-item>
+            <div *ngIf="f.submitted && bookingForm.controls.age.errors?.required" class="help-block">Please enter age</div>
             
             <ion-item >
 				<ion-label>Gender</ion-label>
-				<ion-select [(ngModel)]="one.Gender">
+				<ion-select  formControlName="gender" name="Gender">
 					<ion-option value="M">Male</ion-option>
 					<ion-option value="F">Female</ion-option>
 				</ion-select>
             </ion-item>
+            <div *ngIf="f.submitted && bookingForm.controls.gender.errors?.required" class="help-block">Please select gender</div>
         </ion-list>
          
         <ion-list class="form-section">
              <ion-item>
-                <ion-input type="email" placeholder="Ticket will be sent to this Email ID" name="Email" [(ngModel)]="param.ContactInfo.Email" required></ion-input>
+                <ion-input type="email" placeholder="Ticket will be sent to this Email ID" name="Email" formControlName="email"></ion-input>
             </ion-item>
-             <!--<div *ngIf="!Emailvalid">Please enter valid email address</div>-->
+            <div *ngIf="f.submitted && bookingForm.controls.email.errors?.required" class="help-block">Please enter email address</div>
              <ion-item>
-                <ion-input type="tel" placeholder="Enter Phone Number" name="Phone" [(ngModel)]="param.ContactInfo.Mobile"></ion-input>
+                <ion-input type="tel" placeholder="Enter Phone Number" name="Phone" formControlName="mobile"></ion-input>
             </ion-item>
+            <div *ngIf="f.submitted && bookingForm.controls.mobile.errors?.required" class="help-block">Please enter mobile number</div>
         </ion-list>
-        <button class="theme-btn" (click)="print()" >continue booking</button>
-  
+        <button class="theme-btn" type="submit">continue booking</button>
+      	</form>
     </div>
 </ion-content>

@@ -5,6 +5,7 @@ import moment from 'moment';
 
 import { BusSeatPage } from "../bus-seat/bus-seat";
 import { GeneralProvider } from "../../providers/general/general";
+import { XmlApiProvider } from "../../providers/xml-api";
 /**
  * Generated class for the BusListPage page.
  *
@@ -24,7 +25,7 @@ export class BusListPage {
   busData: any;
   buslist: any;
 newBusList = [];
-  constructor(public navCtrl: NavController,  public modalCtrl: ModalController,public navParams: NavParams,private general:GeneralProvider) {
+  constructor(public navCtrl: NavController, public xmlservice:XmlApiProvider, public modalCtrl: ModalController,public navParams: NavParams,private general:GeneralProvider) {
     console.log(this.navParams.get('data'));
     
     if(this.navParams.get('data') != undefined){
@@ -33,14 +34,17 @@ newBusList = [];
     this.mainList = this.busData.Buses
     this.query = this.navParams.get('searchBus')
     console.log(this.busData);
-    }
-   
+  }
+  
+    
+  
     
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BusListPage');
     this.general.disableMenu(false)
+   
   }
 
   openfilter(){

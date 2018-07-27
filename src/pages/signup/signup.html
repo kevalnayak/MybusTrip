@@ -19,32 +19,34 @@
 <ion-content padding>
 	<div class="page-section">
        <img class="form-logo" src=".../../assets/imgs/bus-logo.png">
-		<form #registerForm="ngForm">
+		<form [formGroup]="signupForm" (ngSubmit)="signup()" #f="ngForm" novalidate>
 
 			<ion-list class="form-section">
 				<ion-item>
-					<ion-input type="text" placeholder="Username" name="username" [(ngModel)]="registerCredentials.username" required></ion-input>
+					<ion-input type="text" placeholder="Username" name="username" formControlName="UserName"></ion-input>
 				</ion-item>
 
 				<ion-item>
-					<ion-input type="email" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
+					<ion-input type="email" placeholder="Email" name="email" formControlName="Email"></ion-input>
 				</ion-item>
 
 				<ion-item>
-					<ion-input type="tel" placeholder="Mobile" name="mobile" [(ngModel)]="registerCredentials.mobile" required></ion-input>
+					<ion-input type="tel" placeholder="Mobile" name="mobile" formControlName="MobileNo"></ion-input>
 				</ion-item>
 
 				<ion-item>
-					<ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
+					<ion-input type="password" placeholder="Password" name="password" formControlName="Password"></ion-input>
 				</ion-item>
 
 				<ion-item>
-					<ion-input type="password" placeholder="Confirm Password" name="confirm_password" [(ngModel)]="registerCredentials.confirm_password" required></ion-input>
+					<ion-input type="password" placeholder="Confirm Password" name="confirm_password" formControlName="cpwd"></ion-input>
 				</ion-item>
-
+				<div class="error" *ngIf="signupForm.get('cpwd').hasError('equalTo') && signupForm.get('cpwd').touched">
+						Password Mismatch
+				</div>
 			</ion-list>
 
-			<button ion-button class="theme-btn" block clear (click)="createAccount()"  [disabled]="!registerForm.form.valid">Create New Account</button>
+			<button ion-button class="theme-btn" block clear>Create New Account</button>
 
 		</form>
 	</div>

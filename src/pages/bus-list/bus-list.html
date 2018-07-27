@@ -21,9 +21,12 @@
 
 <ion-content padding>
 	<div class="title-block">
-		<p>{{mainList[0].FromName}}</p>
+		<p *ngIf="mainList[0].FromName != ''">{{mainList[0].FromName}}</p>
+		<p *ngIf="mainList[0].FromCityName != ''">{{mainList[0].FromCityName}}</p>
+		<!--<p>{{mainList[0].FromName}}</p>-->
 		<ion-icon name="md-arrow-round-forward"></ion-icon>
-		<p>{{mainList[0].ToName}}</p>
+		<p *ngIf="mainList[0].ToName != ''">{{mainList[0].ToName}}</p>
+		<p *ngIf="mainList[0].ToCityName != ''">{{mainList[0].ToCityName}}</p>
 	</div>
 	<div class="title-block date-block">
 		<ion-icon name="arrow-back"></ion-icon>
@@ -38,14 +41,18 @@
 				<ion-row align-items-center >
 					<ion-col col-8>
 						<div class="info-block">
-							<h3>{{changeFormate(one.ArrTime,'LT')}} - <span>{{changeFormate(one.DeptTime,'LT')}}</span></h3>
-							<p>CMS</p>
-							<p>AC</p>
+							<h3 *ngIf="one.ArrTime != ''">{{changeFormate(one.ArrTime,'LT')}} - <span>{{changeFormate(one.DeptTime,'LT')}}</span></h3>
+							<!--<h3 *ngIf="one.ArrTime != ''">{{changeFormate(one.ArrTime,'LT')}} - <span>{{changeFormate(one.DeptTime,'LT')}}</span></h3>-->
+							<p>{{one.CompanyName}}</p>
+							<p *ngIf="one.BusType != undefined">{{one.BusType.IsAC}}</p>
+							<p *ngIf="one.BusType == undefined">{{one.BusTypeName}}</p>
 						</div>
 					</ion-col>
 					<ion-col col-4 class="seat-block">
-						<p>{{one.BusStatus.Availability}} seat</p>
-						<h3>INR {{one.BusStatus.BaseFares[0]}}</h3>
+						<p *ngIf="one.BusStatus != undefined">{{one.BusStatus.Availability}} seat</p>
+						<p *ngIf="one.BusStatus == undefined">{{one.EmptySeats}} seat</p>
+						<h3 *ngIf="one.BusStatus != undefined">INR {{one.BusStatus.BaseFares[0]}}</h3>
+						<h3 *ngIf="one.BusStatus == undefined">INR {{one.AcSeatRate}}</h3>
 					</ion-col>
 				</ion-row>
 			</ion-grid>

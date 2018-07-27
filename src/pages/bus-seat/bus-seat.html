@@ -36,19 +36,20 @@
     <div class="page-section" *ngIf='busArea == "lower"'>
       <h3>Please select a seat</h3>
 
-      <div class="saet-layout">
+      <div class="seat-layout ">
         <ul *ngIf="status">
           <li class="seat-row" >
-            <ul *ngFor='let row of range(0,lowerseat.length - 1)' >
+            <ul *ngFor='let row of range(0,actualRow - 1)' >
               <!--<p>{{row}}</p>-->
-              <li class="seat" *ngFor='let column of range(1,MaxCols)' [ngClass]="(lowerseat[row][column - 1] == -1) ? 'notd' : 'dis' ">
+              <li class="seat " *ngFor='let column of range(1,MaxCols)' [ngClass]="((lowerseat[row][column - 1] == -1) ? 'notd' : 'dis') +' '+ (lowerseatType == 1? 'seat' : (lowerseatType == 2)? 'sofa-seat' : 'semi-sofa-seat' ) ">
                 <p class="number" [ngClass]="(status[lowerseat[row][column - 1]]) == 0? 'Not_Avail' : (status[lowerseat[row][column - 1]]) == 2 ? 'Avail_male' : (status[lowerseat[row][column - 1]]) == 3 ? 'Avail_female' : (status[lowerseat[row][column - 1]]) == 4 ? 'selected' :'Avail'"  *ngIf="status">
                    <!--{{row*3+column}}-->
                    <!--{{status[lowerseat[row][column - 1]]}}-->
+          
                    {{Seats[lowerseat[row][column - 1]]}}
                     <!--{{Seats[row*MaxCols+column-1]}}-->
                 </p>
-                <ion-checkbox (ionChange)='changeLowerSeat(lowerseat[row][column - 1],$event,Seats[lowerseat[row][column - 1]])' [disabled]="(status[lowerseat[row][column - 1]]) == 0"></ion-checkbox>
+                <ion-checkbox (ionChange)='changeLowerSeat(lowerseat[row][column - 1],$event,Seats[lowerseat[row][column - 1]],status[lowerseat[row][column - 1]])' [disabled]="(status[lowerseat[row][column - 1]]) == 0"></ion-checkbox>
               </li>
             </ul>                 
           </li>
@@ -57,11 +58,11 @@
     </div>
     <div class="page-section" *ngIf='busArea == "uper"'>
       <h3>Please select a seat</h3>
-      <div class="saet-layout">
+      <div class="seat-layout">
         <ul *ngIf="status">
-          <li class="seat-row" *ngFor='let row of range(0,uperseat.length - 1)'>
+          <li class="seat-row" *ngFor='let row of range(0,actualRow - 1)'>
             <ul>
-              <li class="seat" *ngFor='let column of range(1,MaxCols)' [ngClass]="(uperseat[row][column - 1] == -1) ? 'notd' : 'dis' ">
+              <li class="seat" *ngFor='let column of range(1,MaxCols)' [ngClass]="((uperseat[row][column - 1] == -1) ? 'notd' : 'dis') +' '+ ((uperseatType == 1 ) ? 'seat' : (uperseatType == 2)? 'sofa-seat' : 'semi-sofa-seat' ) ">
                <p class="number" [ngClass]="(status[lowerseat.length+uperseat[row][column - 1]]) == 0? 'Not_Avail' : (status[lowerseat.length + uperseat[row][column - 1]]) == 2 ? 'Avail_male' : (status[lowerseat.length + uperseat[row][column - 1]]) == 3 ? 'Avail_female' : (status[uperseat[row][column - 1]]) == 4 ? 'selected' :'Avail'"  *ngIf="status">                                    
                    {{Seats[uperseat[row][column - 1]]}}                    
                 </p>
@@ -76,12 +77,21 @@
  
 </ion-content>
 <ion-footer *ngIf="totalFare">
-  <ion-toolbar>
+  <ion-toolbar no-padding>
     <!--<ion-title>Footer</ion-title>-->
      <!--<div *ngIf="totalFare">-->
-      <p>Total Amount :{{totalFare}}</p>
+    <ion-grid no-padding>
+        <ion-row>
+            <ion-col col-9 no-padding>
+                <p class="amount-title">Total Amount :{{totalFare}}</p>
+            </ion-col>
+            <ion-col col-3 no-padding align-self-stretch>
+                <button class="procced-btn" (click)="Procced()">Procced</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
       <!--<p>Tax :{{totalTax}}</p>-->
-      <button  (click)="Procced()">Procced</button>
+      
     <!--</div>-->
   </ion-toolbar>
 </ion-footer>

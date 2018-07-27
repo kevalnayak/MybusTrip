@@ -60,6 +60,7 @@ export class BoardingDropPage {
    this.baseFare = this.navParams.get('basefare');
    this.totalFare = this.navParams.get('totalFare');
    this.ProvId = this.navParams.get('ProvId');
+ 
    this.general.get('journey').then(res=>{
      if(res != null){
       this.journeyInfo = res

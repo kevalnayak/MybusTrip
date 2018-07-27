@@ -4,19 +4,18 @@ page-boarding-drop {
         height: 100%;
     }
     .section {
-        background: #fff;
-        color: #000;
+        @extend %theme-gradient;
+        margin-top: 15px;
+        color: #fff;
         margin-bottom: 4px;
     }
-    .section-active {
-        background: #ffc400;
-        color: #fff;
-    }
+    .section-active { @extend %theme-gradient; margin-top: 15px; color: #fff; }
  
     .child {
-        background: #e8e7e6;
+        padding: 0px 15px;
+        background: rgba(79,147,226,0.09);
         color: #000;
-        margin-bottom: 4px;
+        margin-top: 4px;
     }
     .child-item {
         background: #f3f2f1;

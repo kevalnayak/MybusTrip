@@ -13,6 +13,7 @@ import { BusListPage } from '../pages/bus-list/bus-list';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { FilterAmentitiesPage } from '../pages/filter-amentities/filter-amentities';
+import { GeneralProvider } from "../providers/general/general";
 
 
 @Component({
@@ -25,9 +26,9 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,private general:GeneralProvider) {
     this.initializeApp();
-
+    // this.general.getcompany()
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: SearchBusPage },

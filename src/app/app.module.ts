@@ -18,12 +18,15 @@ import {AutoCompleteModule} from 'ionic2-auto-complete'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GeneralProvider } from '../providers/general/general';
-import {HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { IonicStorageModule } from "@ionic/storage";
-import { DbService } from "../providers/db-service/db-service";
+// import { DbService } from "../providers/db-service/db-service";
 import { SQLite } from "@ionic-native/sqlite";
 import { BusSeatPage } from "../pages/bus-seat/bus-seat";
 import { BoardingDropPage } from "../pages/boarding-drop/boarding-drop";
+// import { HttpModule } from "@angular/http";
+import { AuthInterceptor } from "../providers/http.interceptor";
+import { XmlApiProvider } from "../providers/xml-api";
 
 
 @NgModule({
@@ -45,7 +48,7 @@ import { BoardingDropPage } from "../pages/boarding-drop/boarding-drop";
   imports: [
     BrowserModule,
     AutoCompleteModule, 
-    HttpClientModule,
+    HttpClientModule,    
      IonicStorageModule.forRoot({
       name: '__mydb',
          driverOrder: ['indexeddb', 'sqlite', 'websql']
@@ -72,9 +75,14 @@ import { BoardingDropPage } from "../pages/boarding-drop/boarding-drop";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: AuthInterceptor,
+    //   multi: true
+    // },
     GeneralProvider,   
-    DbService,
-    SQLite
+    XmlApiProvider,
+    SQLite    
   ]
 })
 export class AppModule {}

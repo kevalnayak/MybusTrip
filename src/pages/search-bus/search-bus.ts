@@ -93,7 +93,7 @@ searchBus =  {FromCityId:4292, ToCityId:4562, JourneyDate:''};
                         },{})
                       )
                 } 
-                console.log(res);
+         
                 // for(let i=0;i<res.data.Buses.length;i++){
                 // if(res.data.Buses[i].CompanyID != undefined){
                 // this.xmlservice.GetAmenities(res.data.Buses[i].CompanyID).subscribe(res=>{
@@ -113,30 +113,63 @@ searchBus =  {FromCityId:4292, ToCityId:4562, JourneyDate:''};
                 if(res['success'] == true || res.data.length != 0){  
                   /**
                    * for ITS Api parse pickup and drop point
-                   */
+                   */let allstands = []
                   res.data.Buses.forEach(e=>{
+                    let mainrate = e.BusType == 0? e.AcSeatRate > 0 ? e.AcSeatRate : e.AcSleeperRate > 0 ? e.AcSleeperRate :e.AcSlumberRate
+	                      : e.NonAcSeatRate > 0 ? e.NonAcSeatRate : e.NonAcsleeperRate > 0 ? e.NonAcsleeperRate : e.NonAcSlumberRate
+  
+                    e.mainrate = mainrate;
+                    if(e.BusType.Seating == undefined)
+                    (e.BusType == 0 ) ? e.type = 'NON_AC' : e.type = "AC"
                     if(e.BoardingPoints != "" && e.BoardingPoints != undefined){
                         let pick = []
                           let tmp = e.BoardingPoints.split('#')
                           for(let i=0 ; i<tmp.length;i++){
                           let no = tmp[i].split('|')
-                          pick.push({'PickupCode':Math.floor(Math.random() * 100) + 1,PickupName:no[1]})
+                          
+                          let filter = allstands.find(function(element) {
+                          return element.PickupName == no[1]
+                          });
+                          
+                          if(filter == undefined){
+                            let param = {'PickupCode':Math.floor(Math.random() * 100) + 1,PickupName:no[1]}
+                            pick.push(param)
+                             allstands.push(param)
+                          }
+                          else{
+                            pick.push({'PickupCode':filter.PickupCode,PickupName:no[1]})
+                          }
+                         
                           }         
                          e.Pickups = pick
+                    }else if(e.BoardingPoints == ''){
+                      e.Pickups = []
                     }
                     if( e.DroppingPoints != "" && e.DroppingPoints != undefined){
                        let pick = []
                           let tmp = e.DroppingPoints.split('#')
                           for(let i=0 ; i<tmp.length;i++){
-                          let no = tmp[i].split('|')
-                          pick.push({'DropoffCode':Math.floor(Math.random() * 100) + 1,DropoffName:no[1]})
+                          let no = tmp[i].split('|')                          
+                           let filter = allstands.find(function(element) {
+                          return element.DropoffName == no[1]
+                          });
+                          
+                          if(filter == undefined){
+                            let param = {'DropoffCode':Math.floor(Math.random() * 100) + 1,DropoffName:no[1]}
+                            pick.push(param)
+                             allstands.push(param)
+                          }
+                          else{
+                            pick.push({'DropoffCode':filter.DropoffCode,DropoffName:no[1]})
+                          }
+                         
                           }         
                          e.Dropoffs = pick
                     }else if(e.DroppingPoints == ""){
                       e.Dropoffs = []
                     }
                   })   
-                  console.log(res.data);
+                  // console.log(allstands);
                      
                 this.navCtrl.push(BusListPage,{'data':res['data'],'searchBus':this.searchBus})
                 }else{
@@ -148,22 +181,10 @@ searchBus =  {FromCityId:4292, ToCityId:4562, JourneyDate:''};
                 this.navCtrl.push(BusListPage,{'data':res['data'],'searchBus':this.searchBus})
                 }else{
                 this.general.showToast("No bus available for selected date");
-
                 }
               }
           })
-        })
-
-      // End
-      // console.log(newdata);
-      
-      // if(res['success'] == true && res['data'].Buses.length != 0){
-      //   this.navCtrl.push(BusListPage,{'data':res['data'],'searchBus':this.searchBus})
-      // }else{
-      //   this.general.showToast("No bus available for selected date");
-        
-      // }
-      
+        })           
     })
 
     
@@ -191,8 +212,6 @@ searchBus =  {FromCityId:4292, ToCityId:4562, JourneyDate:''};
             
             if(values != undefined){
             values = values [0]['AllRouteBusLists']
-              console.log(values);
-              
               let newdata = []
               for(k in values)
               {               

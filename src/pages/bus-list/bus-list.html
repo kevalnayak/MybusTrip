@@ -36,23 +36,25 @@
 
 	<div *ngIf="buslist.length != 0">
 	<ion-card *ngFor='let one of buslist'>
-		<ion-card-content (click)='Bookseat(one.BusStatus.RouteBusId,one)'>
+		<ion-card-content (click)='Bookseat(one)'>
 			<ion-grid no-padding>
 				<ion-row align-items-center >
 					<ion-col col-8>
 						<div class="info-block">
-							<h3 *ngIf="one.ArrTime != ''">{{changeFormate(one.ArrTime,'LT')}} - <span>{{changeFormate(one.DeptTime,'LT')}}</span></h3>
+							<h3 *ngIf="one.ArrTime != undefined">{{changeFormate(one.ArrTime,'LT')}} - <span>{{changeFormate(one.DeptTime,'LT')}}</span></h3>
+							<h3 *ngIf="one.ArrTime == undefined">{{one.CityTime}} - <span>{{one.ArrivalTime}}</span></h3>
 							<!--<h3 *ngIf="one.ArrTime != ''">{{changeFormate(one.ArrTime,'LT')}} - <span>{{changeFormate(one.DeptTime,'LT')}}</span></h3>-->
 							<p>{{one.CompanyName}}</p>
-							<p *ngIf="one.BusType != undefined">{{one.BusType.IsAC}}</p>
-							<p *ngIf="one.BusType == undefined">{{one.BusTypeName}}</p>
+							<p *ngIf="one.BusType.IsAC != undefined">{{one.BusType.IsAC}}</p>
+							<p *ngIf="one.BusType == 1">AC</p>
+							<p *ngIf="one.BusType == 0">NON_AC</p>
 						</div>
 					</ion-col>
 					<ion-col col-4 class="seat-block">
 						<p *ngIf="one.BusStatus != undefined">{{one.BusStatus.Availability}} seat</p>
 						<p *ngIf="one.BusStatus == undefined">{{one.EmptySeats}} seat</p>
 						<h3 *ngIf="one.BusStatus != undefined">INR {{one.BusStatus.BaseFares[0]}}</h3>
-						<h3 *ngIf="one.BusStatus == undefined">INR {{one.AcSeatRate}}</h3>
+						<h3 *ngIf="one.mainrate != undefined">INR {{one.mainrate}}</h3>
 					</ion-col>
 				</ion-row>
 			</ion-grid>

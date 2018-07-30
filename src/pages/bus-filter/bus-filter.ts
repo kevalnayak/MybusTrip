@@ -209,21 +209,26 @@ applyFilter($event , flag){
 
 applybusType(busList,filter){
   let newbuslist = []
-    
+      console.log(filter);
+      
     for (let j = 0; j < busList.length; j++) {
       let amityFlagMain = 1; 
       for (let i = 0; i < filter.length; i++) {
         let amityFlag = 0; 
         // for (let k = 0; k < busList[j].Pickups.length; k++) {
-            if (filter[i] == busList[j].BusType.IsAC) {
-                amityFlag = 1;                  
-            }
+            // if (filter[i] == busList[j].BusType.IsAC) {
+            //     amityFlag = 1;                  
+            // }
 
             if (filter[i] == 'Sleeper') {
               if('SEATER_SLEEPER' == busList[j].BusType.Seating)
                 amityFlag = 1;       
               if('SEATER_SEMI_SLEEPER' == busList[j].BusType.Seating) 
                 amityFlag = 1;          
+            }else if(filter[i] == 'AC'){
+              if('AC' == busList[j].type){
+                amityFlag = 1
+              }
             }
           // }
           if (amityFlag == 0) {
@@ -318,8 +323,7 @@ applyTravel(busList, filter){
       }
     }
     
-    console.log(newbuslist, 'newbuslist travel'); 
-    return false;
+    return newbuslist;
 }
 
 applyAmity(busList,filter){  
@@ -328,6 +332,7 @@ applyAmity(busList,filter){
       let amityFlagMain = 1; 
       for (let i = 0; i < filter.length; i++) {
         let amityFlag = 0; 
+        if(busList[j].Amenities != undefined)
         for (let k = 0; k < busList[j].Amenities.length; k++) {
             if (filter[i].value == busList[j].Amenities[k]) {
                 amityFlag = 1; 

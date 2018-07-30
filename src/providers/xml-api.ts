@@ -252,13 +252,13 @@ export class XmlApiProvider {
    }
    return this.http.post(`${this.URL}ITSGateway.asmx??op=GetCompanyList`,data,httpOptions)
   }
-  GetSeatArrangementDetails(){
+  GetSeatArrangementDetails(id){
     const data =`<?xml version="1.0" encoding="utf-8"?>
     <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
       <soap12:Body>
         <GetSeatArrangementDetails xmlns="http://apimybustrip.itspl.net/">
-          <ReferenceNumber>string</ReferenceNumber>
-          <VerifyCall>string</VerifyCall>
+          <ReferenceNumber>`+id+`</ReferenceNumber>
+          <VerifyCall>84cab3fbae3946569be9103d4a87ffde37636556810302828645</VerifyCall>
         </GetSeatArrangementDetails>
       </soap12:Body>
     </soap12:Envelope>`

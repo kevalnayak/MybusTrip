@@ -99,8 +99,16 @@ newBusList = [];
                 if(maxCol < parseInt(tmpdata.Column)){
                   maxCol =  tmpdata.Column
                 }
-          } 
-         
+          }
+
+        //   lower.sort(function (a, b) {
+        //   return a.Row - b.Row;
+        // });
+        // lower.sort(function (a, b){
+        //     return a.Column - b.Column;
+        // });
+        
+        
           let param = {
             lower:lower,
             upper:upper,

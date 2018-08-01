@@ -180,41 +180,44 @@ export class BusSeatPage {
     })
   }else if(this.navParams.get('itsdata') != undefined){
     // ITS API data setup for Seat arrangement display 
-    // this.shared.hideloading()
-    //   this.API = 'ITS';
-    //   console.log(this.navParams.get('itsdata'));
-    //   this.mainseatData = this.navParams.get('itsdata')
-    //   //  Testing logic
-    //   this.MaxRows = this.mainseatData.maxRow;
-    //   this.MaxCols = this.mainseatData.maxCol
-    //   if (this.mainseatData.upper.length != 0) {
-    //     this.actualRow = Math.round(this.MaxRows / 2)
-    //   } else {
-    //     this.actualRow = this.MaxRows
-    //   }
+    this.shared.hideloading()
+      this.API = 'ITS';
+      console.log(this.navParams.get('itsdata'));
+      this.mainseatData = this.navParams.get('itsdata')
+      //  Testing logic
+      this.MaxRows = this.mainseatData.maxRow;
+      this.MaxCols = this.mainseatData.maxCol
+      if (this.mainseatData.upper.length != 0) {
+        this.actualRow = Math.round(this.MaxRows / 2)
+      } else {
+        this.actualRow = this.MaxRows
+      }
 
-    //   if(this.mainseatData.lower.length != 0){
-    //     for(let i=0;i<this.MaxRows;i++){
-    //             this.lowerseat.push([0]);
-    //             for(let j=0;j<this.MaxCols;j++){
-    //               this.lowerseat[i][j] = -1;          
-    //             }
-    //           }
-
-
-    //           for(let i=0;i<this.mainseatData.lower.length;i++){
-    //             var row = this.mainseatData.lower[i].Row;
-    //             var col = this.mainseatData.lower[i].Column;
-    //             var value =  this.mainseatData;
-    //             this.lowerseatType = data['data'].ChartLayout.Layout.Lower[i][5];
+      if(this.mainseatData.lower.length != 0){
+        for(let i=0;i<=this.MaxRows;i++){
+                this.lowerseat.push([0]);
+                for(let j=0;j<=this.MaxCols;j++){
+                  this.lowerseat[i][j] = -1;          
+                }
+              }
               
-    //             if (this.lowerseatType == 2) {
-    //               row = row / 2;
-    //             }
-    //             this.lowerseat[row][col] = value;
-    //           }
-    //   }
-    // }
+
+              for(let i=0;i<this.mainseatData.lower.length;i++){
+                                
+                var row = this.mainseatData.lower[i].Row;
+                var col = this.mainseatData.lower[i].Column;
+                // var value =  i;
+                this.lowerseatType = this.mainseatData.lower[i].SeatType
+                // console.log(row,col);
+                // if (this.lowerseatType == 2) {
+                //   row = row / 2;
+                // }
+                this.lowerseat[row][col] = this.mainseatData.lower[i].SeatNo;
+              } 
+              console.log(this.lowerseat);
+             
+      }
+    }
   }
 
   // seatsAvailable(element) {

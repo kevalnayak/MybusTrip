@@ -78,8 +78,9 @@ newBusList = [];
           let upper = [];
           var maxRow = 0;
           var maxCol = 0;
-          
-          for(let i=0;i<res.length;i++){
+
+          for(let i=0;i< res.length;i++){
+           
                let tmpdata =   res[i].reduce(function(newarr, currentobj){
                     for(let key in currentobj){
                       newarr[key] = currentobj[key]                                             
@@ -100,15 +101,31 @@ newBusList = [];
                   maxCol =  tmpdata.Column
                 }
           }
-
-        //   lower.sort(function (a, b) {
-        //   return a.Row - b.Row;
+       
+        // let tmpdata = lower
+        // lower = []
+        // let data = tmpdata.reduce((r, e) => {
+                      
+        //   let group = e.Row;
+        //   if(!r[group]) r[group] = {group, children: [e]}
+        //   else r[group].children.push(e);
+        //   return r;
+        //   }, {})
+        //   for(let one in data){
+        //   let child = data[one].children
+        //   child.sort(function (a, b){
+        //   return a.Column - b.Column;
+        //   });
+        //   lower[one] = child
+        //   // data[one].children = [];
+        //   // data[one].children = child
+        // }
+        // var myNewArray = lower.reduce(function(prev, curr) {
+        // return prev.concat(curr);
         // });
-        // lower.sort(function (a, b){
-        //     return a.Column - b.Column;
-        // });
+        // console.log(myNewArray)
         
-        
+          // return false
           let param = {
             lower:lower,
             upper:upper,

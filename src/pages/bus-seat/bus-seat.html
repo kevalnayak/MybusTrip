@@ -29,16 +29,16 @@
       </ion-segment-button>
     </ion-segment>
     
-    <!--<div class="page-section" *ngIf='busArea == "lower" && API == "iamgds"'>
+   <div class="page-section" *ngIf='busArea == "lower" && API == "iamgds"'>
       <h3>Please select a seat</h3>
 
       <div class="seat-layout ">
         <ul *ngIf="status">
           <li class="seat-row" >
             <ul *ngFor='let row of range(0,actualRow - 1)' >             
-              <li class="seat " *ngFor='let column of range(1,MaxCols)' [ngClass]="((lowerseat[row][column - 1] == -1) ? 'notd' : 'dis') +' '+ (lowerseatType == 1? 'seat' : (lowerseatType == 2)? 'sofa-seat' : 'semi-sofa-seat' ) ">
-                <p class="number" [ngClass]="(status[lowerseat[row][column - 1]]) == 0? 'Not_Avail' : (status[lowerseat[row][column - 1]]) == 2 ? 'Avail_male' : (status[lowerseat[row][column - 1]]) == 3 ? 'Avail_female' : (status[lowerseat[row][column - 1]]) == 4 ? 'selected' :'Avail'"  *ngIf="status">
-                   {{Seats[lowerseat[row][column - 1]]}}                   
+              <li class="seat " *ngFor='let column of range(0,MaxCols)' [ngClass]="((lowerseat[row][column] == -1) ? 'notd' : 'dis') +' '+ (ITSseatType[row][column] == 1? 'seat' : (ITSseatType[row][column] == 2)? 'sofa-seat' : 'semi-sofa-seat' ) ">
+                <p class="number" [ngClass]="(status[lowerseat[row][column]]) == 0? 'Not_Avail' : (status[lowerseat[row][column]]) == 2 ? 'Avail_male' : (status[lowerseat[row][column]]) == 3 ? 'Avail_female' : (status[lowerseat[row][column]]) == 4 ? 'selected' :'Avail'"  *ngIf="status">
+                   {{Seats[lowerseat[row][column]]}}                        
                 </p>
                 <ion-checkbox (ionChange)='changeLowerSeat(lowerseat[row][column - 1],$event,Seats[lowerseat[row][column - 1]],status[lowerseat[row][column - 1]])' [disabled]="(status[lowerseat[row][column - 1]]) == 0"></ion-checkbox>
               </li>
@@ -46,8 +46,8 @@
           </li>
         </ul>
       </div>
-    </div>-->
-    <!--<div class="page-section" *ngIf='busArea == "uper" && API == "iamgds"'>
+    </div>
+    <div class="page-section" *ngIf='busArea == "uper" && API == "iamgds"'>
       <h3>Please select a seat</h3>
       <div class="seat-layout">
         <ul *ngIf="status">
@@ -57,13 +57,13 @@
                <p class="number" [ngClass]="(status[lowerseat.length+uperseat[row][column - 1]]) == 0? 'Not_Avail' : (status[lowerseat.length + uperseat[row][column - 1]]) == 2 ? 'Avail_male' : (status[lowerseat.length + uperseat[row][column - 1]]) == 3 ? 'Avail_female' : (status[uperseat[row][column - 1]]) == 4 ? 'selected' :'Avail'"  *ngIf="status">                                    
                    {{Seats[uperseat[row][column - 1]]}}                    
                 </p>
-                <ion-checkbox (ionChange)='changeuperseat(uperseat[row][column - 1],$event)' [disabled]="(status[uperseat[row][column - 1]]) == 0"></ion-checkbox>
+                <ion-checkbox (ionChange)='changeUperSeat(uperseat[row][column - 1],$event)' [disabled]="(status[uperseat[row][column - 1]]) == 0"></ion-checkbox>
               </li>
             </ul>
           </li>
         </ul>
       </div>
-    </div>-->
+    </div>
 
      <div class="page-section" *ngIf='busArea == "lower" && API == "ITS"'>
       <h3>Please select a seat</h3>
@@ -71,13 +71,13 @@
       <div class="seat-layout ">
         <ul>
           <li class="seat-row" >
-            <ul *ngFor='let row of range(0,actualRow)' >             
-              <li class="seat " *ngFor='let column of range(1,MaxCols)' [ngClass]="((lowerseat[row][column - 1] == -1) ? 'notd' : 'dis') +' '+ (lowerseatType == 1? 'seat' : (lowerseatType == 2)? 'sofa-seat' : 'semi-sofa-seat' ) ">
-                <p class="number" [ngClass]="mainseatData.Available == 'N' ? 'Not_Avail' : 'Avail'">                  
-                   {{lowerseat[row][column]}}                
-                  
+            <ul *ngFor='let row of range(0,MaxRows)' >             
+              <li class="seat " *ngFor='let column of range(1,MaxCols)' [ngClass]="((lowerseat[row][column] == -1 || lowerseatRate[row][column] == 0) ? 'notd' : 'dis')+ ' ' +((ITSseatType[row][column] == 0 ) ? 'seat' : (ITSseatType[row][column] == 1)? 'sofa-seat' : 'semi-sofa-seat' ) ">
+                <p class="number" [ngClass]="( isAvail[row][column]) == 'N'? 'Not_Avail' : (isLadies[row][column]) == 'N' ? 'Avail_male' : (isLadies[row][column]) == 'Y' ? 'Avail_female' :'Avail'">                  
+                  {{lowerseat[row][column]}}                
+                
                 </p>
-                <ion-checkbox  ></ion-checkbox>
+                <ion-checkbox  (ionChange)="changexmlLowerseat(lowerseat[row][column],$event)"></ion-checkbox>
               </li>
             </ul>                 
           </li>
@@ -85,7 +85,23 @@
       </div>
     </div>
   </div>
- 
+  <div class="page-section" *ngIf='busArea == "uper" && API == "ITS"'>
+    <h3>Please select a seat</h3>
+    <div class="seat-layout">
+      <ul >
+        <li class="seat-row" *ngFor='let row of range(0,MaxRows)'>
+          <ul>
+            <li class="seat" *ngFor='let column of range(1,MaxCols)' [ngClass]="((uperseat[row][column] == -1 ) ? 'notd' : 'dis')+ ' ' +((uperseatType == 0 ) ? 'seat' : (uperseatType == 1)? 'sofa-seat' : 'semi-sofa-seat' ) ">
+             <p class="number" [ngClass]="(isUpAvail[row][column]) == 'N'? 'Not_Avail' : (isUpLadies[row][column]) == 'N' ? 'Avail_male' : (isUpLadies[row][column]) == 'Y' ? 'Avail_female' :'Avail'">                                    
+              {{uperseat[row][column]}}                    
+              </p>
+              <ion-checkbox (ionChange)='changexmlUperSeat(uperseat[row][column],$event)'></ion-checkbox>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
 </ion-content>
 <ion-footer *ngIf="totalFare">
   <ion-toolbar no-padding>
